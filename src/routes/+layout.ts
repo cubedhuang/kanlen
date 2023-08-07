@@ -1,6 +1,6 @@
 import type { WordData } from '$lib/types';
 
-import type { PageLoad } from './$types';
+import type { LayoutLoad } from './$types';
 
 export const load = (({ fetch }) => {
 	return {
@@ -8,4 +8,4 @@ export const load = (({ fetch }) => {
 			WordData[]
 		>
 	};
-}) satisfies PageLoad;
+}) satisfies LayoutLoad;

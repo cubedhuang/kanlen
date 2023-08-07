@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Popup from '$lib/components/Popup.svelte';
 	import WordDetails from '$lib/components/WordDetails.svelte';
+	import WordPopup from '$lib/components/WordPopup.svelte';
 	import type { WordData } from '$lib/types';
 
 	export let data;
@@ -63,7 +63,7 @@
 	>.
 </p>
 
-<p class="mt-8 font-semibold">
+<p class="mt-8 flex flex-wrap gap-2 font-semibold">
 	<button
 		class="border-2 px-3 py-1.5 rounded-xl bg-white hocus-visible:border-gray-400 transition"
 		on:click={() => (detailed = !detailed)}
@@ -74,6 +74,13 @@
 			sisa
 		{/if}
 	</button>
+
+	<a
+		href="/kose"
+		class="border-2 px-3 py-1.5 rounded-xl bg-white hocus-visible:border-gray-400 transition"
+	>
+		sana kose
+	</a>
 </p>
 
 <p class="mt-2">
@@ -104,11 +111,13 @@
 	{/each}
 </div>
 
-<Popup bind:value={selectedWord} let:value>
-	<h2 class="text-2xl font-bold">{value.word}</h2>
-
-	<WordDetails word={value} detailed />
-</Popup>
+<WordPopup
+	bind:word={selectedWord}
+	on:refer={e => {
+		selectedWord =
+			data.words.find(word => word.word === e.detail.word) ?? null;
+	}}
+/>
 
 <style lang="postcss">
 	.grid {
