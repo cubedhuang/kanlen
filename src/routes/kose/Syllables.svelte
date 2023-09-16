@@ -23,6 +23,11 @@
 		return acc;
 	}, new Map<string, number>());
 
+	$: maxCount = [...syllableGroups.values()].reduce(
+		(acc, count) => Math.max(acc, count),
+		0
+	);
+
 	const consonants = [
 		'',
 		'f',
@@ -105,10 +110,12 @@
 					<SyllableSpace
 						syllable="{consonant}{vowel}"
 						count={syllableGroups.get(`${consonant}${vowel}`) ?? 0}
+						{maxCount}
 					/>
 					<SyllableSpace
 						syllable="{consonant}{vowel}n"
 						count={syllableGroups.get(`${consonant}${vowel}n`) ?? 0}
+						{maxCount}
 					/>
 				</div>
 			{/each}
