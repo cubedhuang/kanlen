@@ -68,6 +68,8 @@ function pageToWordData(
 		}
 	}
 
+	if (!word.word) return null;
+
 	return word;
 }
 
